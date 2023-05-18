@@ -65,7 +65,7 @@ def get_html(city, areaBusiness, browser_type=None):
             # 测试用命令
             # print(jobs)
             counter += 1
-            # time.sleep(random.randint(60, 120))
+            time.sleep(random.randint(60, 120))
             # 保存失败位置到文件
             with open(last_success_page, 'w') as f:
                 f.write(str(page_number))
