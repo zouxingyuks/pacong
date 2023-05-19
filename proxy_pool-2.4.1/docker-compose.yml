@@ -1,0 +1,10 @@
+version: "3"
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass "123"  # 设置Redis密码
+    volumes:
+      - ./data:/data  # 挂载host目录作为持久化存储
+    restart: always
