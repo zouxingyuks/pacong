@@ -3,7 +3,35 @@ import psycopg2
 
 from dao.init import get_mysql_config
 
-config = get_mysql_config()
+config = {}
+
+config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config', 'config.yaml')
+try:
+    with open(config_file, encoding='utf-8') as f:
+        config = yaml.safe_load(f)
+except IOError:
+    print('文件不存在，新建 config/config.yaml 文件... 请配置好数据库后再执行setup')
+    config = {
+        'mysql': {
+            'host': '',
+            'port': '',
+            'user': '',
+            'password': '.',
+            'database': ''
+        },
+        'retry_timeout': '',
+        'max_retry_attempts': '',
+        'Debug_mod': True,
+        'proxy_server': {
+            'server': '',
+            'username': '',
+            'password': ''
+        }
+    }
+    with open(config_file, 'w') as f:
+        yaml.dump(config, f)
+    exit()
+
 conn = mysql.connector.connect(
     host=config['host'],
     port=config['port'],

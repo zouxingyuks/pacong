@@ -48,12 +48,12 @@ try:
                         # print(jobs)
                         save_jobs_to_mysql(jobs)
                         last_success_line = line_number
-                        last_success_city = city
+                        last_success_city = city["id"]
                         # 保存最后一次成功的行号和城市到文件
                         with open(last_success_file, 'w') as file:
                             file.write(str(last_success_line))
                         with open(last_success_city_file, 'w') as file:
-                            file.write(last_success_city)
+                            file.write(str(last_success_city))
                         print(f"Successfully imported jobs for city '{last_success_city}' and area '{area['id']}'")
                     except Exception as e:
                         print(f"Failed to import jobs for city '{last_success_city}' and area '{area['id']}': {str(e)}")
