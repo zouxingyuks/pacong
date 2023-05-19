@@ -39,7 +39,7 @@ def get_html(city, areaBusiness, browser_type=None):
     jobs = []
     with sync_playwright() as p:
         if not browser_type:
-            browser_type = random.choice(['firefox'])
+            browser_type = random.choice(['firefox', 'chromium', 'webkit'])
         if browser_type == 'chromium':
             browser = p.chromium.launch(headless=headless)
         elif browser_type == 'firefox':
@@ -62,6 +62,7 @@ def get_html(city, areaBusiness, browser_type=None):
                 print("retry_attempts:" + str(retry_attempts))
                 try:
                     proxy = get_proxy().get("proxy")
+                    print(f"Using proxy: {proxy}")
                     proxies = {"http": "http://{}".format(proxy)}
                     page.set_extra_http_headers({"Proxy": "http://{}".format(proxy)})
                     page.goto(url, timeout=config['retry_timeout'])
