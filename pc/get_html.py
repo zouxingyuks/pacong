@@ -72,7 +72,7 @@ def get_html(city, areaBusiness, browser_type=None):
         browser = p.firefox.launch(firefox_user_prefs=configure_proxy(proxy),
                                    headless=headless,
                                    slow_mo=5000,
-                                   timeout=30000)
+                                   timeout=25000)
         context = browser.new_context()
 
         for page_number in range(1, 11):
@@ -89,7 +89,7 @@ def get_html(city, areaBusiness, browser_type=None):
                     break
                 except Exception:
                     retry_attempts += 1
-                    time.sleep(random.randint(6, 60))
+                    # time.sleep(random.randint(6, 30))
                     if retry_attempts == config['max_retry_attempts']:
                         browser.close()
                         retry_attempts = 0
@@ -100,7 +100,7 @@ def get_html(city, areaBusiness, browser_type=None):
                         browser = p.firefox.launch(firefox_user_prefs=configure_proxy(proxy),
                                                    headless=headless,
                                                    slow_mo=5000,
-                                                   timeout=30000)
+                                                   timeout=25000)
                         context = browser.new_context()
                         page = context.new_page()
                         page.bring_to_front()

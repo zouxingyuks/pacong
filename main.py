@@ -58,7 +58,7 @@ try:
                     except Exception as e:
                         print(f"Failed to import jobs for city '{last_success_city}' and area '{area['id']}': {str(e)}")
                         break  # 终止循环，避免继续处理下一行数据
-                    time.sleep(random.randint(120, 600))
+                    time.sleep(random.randint(10, 100))
 
 
 except FileNotFoundError as e:
