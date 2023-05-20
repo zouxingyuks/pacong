@@ -65,7 +65,7 @@ class ProxyFetcher(object):
     def seofangfaProxy():
         url = 'https://proxy.seofangfa.com/'
         with sync_playwright() as p:
-            browser = p.firefox.launch(headless=False)
+            browser = p.firefox.launch(headless=True)
             page = browser.new_page()
             page.goto(url)
             page.wait_for_selector('table')
@@ -81,7 +81,29 @@ class ProxyFetcher(object):
                     yield f'{ip}:{port}'
 
             browser.close()
+    @staticmethod
+    def ip3366Proxy():
+        base_url = 'http://www.ip3366.net/?stype=1&page='
+        with sync_playwright() as p:
+            browser = p.firefox.launch(headless=True)
+            page = browser.new_page()
 
+            for current_page in range(1, 8):
+                url = base_url + str(current_page)
+                page.goto(url)
+                page.wait_for_selector('table')
+                html = page.content()
+
+                soup = BeautifulSoup(html, 'html.parser')
+                proxy_table = soup.find('table', class_='table')
+                for tr in proxy_table.find_all('tr'):
+                    td = tr.find('td')
+                    if td is not None:
+                        ip = td.text
+                        port = tr.find_all('td')[1].text
+                        yield f'{ip}:{port}'
+
+            browser.close()
 if __name__ == '__main__':
     p = ProxyFetcher()
     for _ in p.freeProxy06():

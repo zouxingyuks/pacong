@@ -56,6 +56,7 @@ PROXY_FETCHER = [
     # "freeProxy10",
     "docipProxy",
     "seofangfaProxy",
+    "ip3366Proxy",
 ]
 
 # ############# proxy validator #################
