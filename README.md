@@ -65,9 +65,8 @@
 
 ### parse.py
 
-1. 从 BeautifulSoup 对象中查找第一个 job-card-wrapper 元素
+1. 从 BeautifulSoup 对象中查找第一个 job-card-wrapper 元素，作为一个 Job 卡片。
 
-，作为一个 Job 卡片。
 2. 提取该卡片的详细信息，包括职位链接、职位名称、地点、薪资、标签和公司名称。
 3. 将一个 Job 卡片的信息添加到 job_cards 列表。
 4. 找到下一个 job-card-wrapper 元素，重复步骤 2-3。
@@ -130,3 +129,6 @@
 ## 项目剪影
 
 ![代理被封后，自动重置浏览器](https://img.anubis.cafe/202305202029843.webp)
+
+## 注意问题
+1. 字符集要注意，建议用 utf8mb4

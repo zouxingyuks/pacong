@@ -40,16 +40,16 @@ conn = mysql.connector.connect(
 )
 cursor = conn.cursor()
 
-# 创建jobs表
+# 创建jobs表，并指定字符集和编码为utf8mb4
 cursor.execute('''
     CREATE TABLE jobs (
         id SERIAL PRIMARY KEY, 
         job_link TEXT,
-        job_name VARCHAR(255),
-        location VARCHAR(255), 
-        salary VARCHAR(255),
-        job_tags VARCHAR(255),
-        company VARCHAR(255)
+        job_name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+        location VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, 
+        salary VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+        job_tags VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+        company VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
     )
 ''')
 
@@ -57,12 +57,13 @@ cursor.execute('''
 cursor.execute('''
     ALTER TABLE jobs
     MODIFY COLUMN job_link TEXT COMMENT '岗位链接',
-    MODIFY COLUMN job_name VARCHAR(255) COMMENT '岗位名称',
-    MODIFY COLUMN location VARCHAR(255) COMMENT '工作地点',
-    MODIFY COLUMN salary VARCHAR(255) COMMENT '薪资',
-    MODIFY COLUMN job_tags VARCHAR(255) COMMENT '工作标签',
-    MODIFY COLUMN company VARCHAR(255) COMMENT '公司名称'
+    MODIFY COLUMN job_name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '岗位名称',
+    MODIFY COLUMN location VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '工作地点',
+    MODIFY COLUMN salary VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '薪资',
+    MODIFY COLUMN job_tags VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '工作标签',
+    MODIFY COLUMN company VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '公司名称'
 ''')
+
 
 conn.commit()
 cursor.close()
