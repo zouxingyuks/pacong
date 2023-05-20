@@ -43,8 +43,8 @@ try:
                     # 做一些更新 city 和 area 的操作
                     try:
                         jobs = get_html(city["id"], area["id"])
+                        print(city["id"], " ", area["id"], " has succeed")
                         # 测试用代码
-                        # print(city["id"], area["id"])
                         # print(jobs)
                         save_jobs_to_mysql(jobs)
                         last_success_line = line_number

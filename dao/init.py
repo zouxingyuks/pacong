@@ -1,7 +1,6 @@
-import os
-
 import mysql.connector
 import yaml
+import os
 
 
 def get_mysql_config():
